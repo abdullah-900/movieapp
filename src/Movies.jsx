@@ -22,7 +22,7 @@ if(results.length>0) {
    <div key={index} className='moviecard'>
 <div className='ratingimage'>
 <div className='rating'>
-    <img src='/star-regular.svg'></img>
+    <img src={process.env.PUBLIC_URL + '/star-regular.svg '}></img>
     <span>{Math.floor(movie.vote_average* 10) / 10}</span>
    </div>
    <img src={postersurl + movie.poster_path}></img>
@@ -43,7 +43,7 @@ if(results.length>0) {
    <div key={index} className='moviecard'>
 <div className='ratingimage'>
 <div className='rating'>
-    <img src='/star-regular.svg'></img>
+    <img src={process.env.PUBLIC_URL + '/star-regular.svg '}></img>
     <span>{Math.floor(movie.vote_average* 10) / 10}</span>
    </div>
    <img src={postersurl + movie.poster_path}></img>

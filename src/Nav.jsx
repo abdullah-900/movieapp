@@ -31,7 +31,7 @@ function handleKeyDown(e) {
       <h1> Movies</h1>
   <form onKeyDown={handleKeyDown} className="searchbar">
     <input value={keyword} onChange={(e)=>{SetKeyword(e.target.value)}} type="search" placeholder="Search"></input>
-    <img  onClick={fetchMovies} src="/search.svg"></img>
+    <img  onClick={fetchMovies} src={process.env.PUBLIC_URL + '/search.svg '}></img>
   </form>
     <a>topRated</a>
     </nav>
