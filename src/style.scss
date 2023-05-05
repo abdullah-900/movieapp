@@ -27,15 +27,28 @@ body{
   display: flex;
   flex-direction: column;
   .nav{  
-    @include mobile(){
-      grid-template-columns: (1fr); 
+    a{
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
     }
-display: grid;
-grid-template-columns: repeat(3, 1fr);  
+ @include mobile() {
+  flex-direction: column;
+  gap: 20px;
+ }
+ .suggestion{
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+ }
+display: flex;
 background-color: #4D455D;
 padding: 5px;
+justify-content: space-around;
 align-items: center;
   h1{
+    cursor: pointer;
     font-size: 30px;
     margin-left: 20px;
     color: white;
@@ -48,7 +61,7 @@ align-items: center;
     input{  
       font-size: 16px;
       @include mobile(){
-        padding: 10px 170px 10px 10px;;
+        padding: 10px 150px 10px 10px;;
       }
       padding: 10px 200px 10px 10px;
       background-color: #eaeaeb;
@@ -71,6 +84,11 @@ align-items: center;
     }
    }
   }
+  h1{
+    margin-top: 40px;
+    margin-left: 30px;
+    color: #4D455D;
+  }
   .movies{
     padding: 50px;
     background-color: #F5E9CF;
@@ -86,19 +104,31 @@ align-items: center;
       justify-content: center;
       flex-direction: column;
       img{
-        border-radius: 3px;
-        width: 200px;
+        border-radius: 4px 4px 0px 0px;
+        width: 210px;
         height: 300px;
       }
 .ratingimage{
   position: relative;
+  .controlicon{
+    background-color: #4D455D;
+    color:#F5E9CF;
+    cursor: pointer;
+    border-radius: 1px;
+    position: absolute;
+    right: 0px;
+    border-radius: 1.5px 2px 2px 2px;
+    padding:4px;
+    gap:5px;
+  }
   .rating{
     position: absolute;
     display:flex;
+    left: 0px;
     background-color:yellow;
-    border-radius:4px;
-    padding:7px;
-    gap:5px;
+    border-radius: 3px;
+    padding: 6px;
+    gap:6px;
     img{
       width: 15px;
       height: 15px;
@@ -110,12 +140,28 @@ align-items: center;
           font-size: 18px;
         }
         .overview{
+          #overview{
+            display: none;
+          }
+      
           display: flex;
-          justify-content: center;
+          flex-direction: column;
+          align-items: center;
           margin-top: -5px;
           background-color: #4D455D;
           width: 200px;
+          padding: 5px;
           border-radius: 3px;
+        }
+        .overview:hover{
+          #overview{
+            display: block;
+            }
+        }
+        .ratingimage:hover + .overview{
+          #overview{
+            display: block;
+            }
         }
       }
     
