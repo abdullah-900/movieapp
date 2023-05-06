@@ -9,9 +9,8 @@ const App = () => {
   const[show,setShow]=useState(true)
     const [movies,setMovies]=useState([]);
     const [myList,setMyList]=useState([]);
-    const [topRated,setTopRated]=useState([])
   return (
-<ct.Provider value={{movies,setMovies,myList,setMyList,topRated,setTopRated,show,setShow}}>
+<ct.Provider value={{movies,setMovies,myList,setMyList,show,setShow}}>
     <div className='appcontainer'>
     <Nav/>
     <Movies/>

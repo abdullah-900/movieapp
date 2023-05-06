@@ -1,6 +1,7 @@
 import { useState,useEffect,useContext } from "react";
 import { useMediaQuery } from 'react-responsive';
 import { ct } from "./contexts/context";
+import {ImSpinner2} from 'react-icons/im'
 function Nav() {
   const [finish ,setFinish]=useState(false)
   const {setMovies,setMyList,myList,setShow}=useContext(ct)
@@ -61,7 +62,7 @@ setShow(false)
  if (isMobile) {
   return (
     <nav className="nav">
-      <h1 onClick={()=>showMyList}> Movies</h1>
+      <h1>FilmFinder</h1>
   <form onKeyDown={handleKeyDown} className="searchbar">
     <input value={keyword} onChange={(e)=>{SetKeyword(e.target.value)}} type="search" placeholder="Search"></input>
     <img  onClick={fetchMovies} src={process.env.PUBLIC_URL + '/search.svg '}></img>
@@ -70,13 +71,14 @@ setShow(false)
   <a onClick={()=>handleSelect('top_rated')}>TopRated</a>
   <a onClick={()=>handleSelect('popular')}>Popular</a>
   <a onClick={()=>handleSelect('upcoming')}>Upcoming</a>
+  <a onClick={showMyList}>Mylist</a>
     </div>
     </nav>
   );
  }else {
   return (
     <nav className="nav">
-      <h1 onClick={showMyList}> Movies</h1>
+      <h1>FilmFinder</h1>
   <form onKeyDown={handleKeyDown} className="searchbar">
     <input value={keyword} onChange={(e)=>{SetKeyword(e.target.value)}} type="search" placeholder="Search"></input>
     <img  onClick={fetchMovies} src={process.env.PUBLIC_URL + '/search.svg '}></img>
@@ -84,6 +86,7 @@ setShow(false)
     <a onClick={()=>handleSelect('top_rated')}>TopRated</a>
     <a onClick={()=>handleSelect('popular')}>Popular</a>
     <a onClick={()=>handleSelect('upcoming')}>Upcoming</a>
+    <a onClick={showMyList}>Mylist</a>
     </nav>
   );
  }
