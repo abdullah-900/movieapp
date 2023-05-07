@@ -1,6 +1,6 @@
 
 
-# FilmFinder Readme
+# FilmFinder
 
 This is a FilmFinder app built with React and SCSS that allows you to search for movies and add them to your favorites list. The app uses local storage to store the data and the TMDB API to fetch movie data.
 
@@ -31,6 +31,9 @@ To view your favorites list, click on the "My List" button in the navigation bar
 When you add or remove a movie from your favorites, a toast notification will appear at the top of the screen to confirm the action. Clicking on the toast notification when adding a movie to your favorites will navigate you to the "My List" page.
 
 To delete all the movies from your favorites list, click on the delete button.
+
+## Discover Movies
+Explore top rated, upcoming, and popular movies by clicking on the corresponding buttons in the navigation bar.
 
 ### Local Storage
 
