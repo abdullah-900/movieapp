@@ -26,7 +26,16 @@ body{
   height: 100vh;
   display: flex;
   flex-direction: column;
+  gap: 100px;
+  @include mobile(){
+    gap: 200px;
+  }
   .nav{  
+position: fixed;
+    z-index: 1;
+     top: 0;
+    left: 0;
+    width: 100%;
     a{
       color: white;
       font-size: 20px;
@@ -41,7 +50,10 @@ body{
   width: 95%;
   display: flex;
   justify-content: space-around;
-  padding: 20px;
+  padding: 10px;
+  @include mobile(){
+    padding-bottom: 20px;
+  }
  }
 display: flex;
 background-color: #4D455D;
@@ -49,9 +61,7 @@ padding: 5px;
 justify-content: space-around;
 align-items: center;
   h1{
-    margin-bottom: 45px;
     font-size: 30px;
-    margin-left: 20px;
     color: white;
    @include mobile(){
     text-align: center;
@@ -87,17 +97,26 @@ align-items: center;
     }
    }
   }
-  h1{
-    margin-top: 50px;
-    margin-left: 30px;
-    @include mobile() {
-      margin-left: 0px;
+
+.mylist{
+  .controllist{
+    margin-left: 13px;
+    margin-top: 30px;
+    gap: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    h1{
+      color: #4D455D;
+      font-size: 35px;
     }
-    color: #4D455D;
-    text-align: center;
+    .del{
+      color: #E96479;
+      cursor: pointer;
+    }
   }
   .movies{
-    padding: 50px;
+    padding: 20px;
     background-color: #F5E9CF;
     display: grid;
     grid-template-columns: repeat(3,1fr);
@@ -115,8 +134,10 @@ align-items: center;
         width: 210px;
         height: 300px;
       }
+}
+  
 .ratingimage{
-  cursor: pointer;
+
   position: relative;
   .controlicon{
     background-color: #4D455D;
@@ -156,10 +177,11 @@ align-items: center;
           width: 200px;
           padding: 5px;
           border-radius: 3px;
-   
+          cursor: pointer;
       }
    
       .overview{
+        cursor: pointer;
         overflow: auto;
         max-height: 100px;
         display: flex;

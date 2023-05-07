@@ -1,16 +1,23 @@
 import { useState,useEffect,useContext } from "react";
 import { useMediaQuery } from 'react-responsive';
 import { ct } from "./contexts/context";
-import {ImSpinner2} from 'react-icons/im'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Nav() {
+
   const [finish ,setFinish]=useState(false)
   const {setMovies,setMyList,myList,setShow}=useContext(ct)
+  
   useEffect (()=>{
     const data = window.localStorage.getItem('myList');
      if (data!==null) setMyList(JSON.parse(data))
     setFinish(true)
+ toast('click on movie name to show the story')
     },[])
-useEffect(()=>{ myList && showMyList()},[finish])
+useEffect(()=>{ 
+  myList && showMyList()
+},[finish])
+
   const isMobile = useMediaQuery({
     query: '(max-width: 420px)'
   })
@@ -56,6 +63,7 @@ for(const a of myList) {
   const jn=await myfav.json()
   arr.push(jn)  
 }
+
 setMovies(arr)
 setShow(false)
 }
