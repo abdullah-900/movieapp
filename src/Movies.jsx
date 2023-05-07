@@ -8,33 +8,20 @@ import { ct } from "./contexts/context";
 const Movies = () => {  
 const [checkIndex,setCheckIndex]=useState(null)
   const {movies,setMovies,myList,setMyList,show,setShow}=useContext(ct)
-console.log(myList)
 useEffect(() => {
   window.localStorage.setItem('myList', JSON.stringify(myList));
 }, [myList]);
 
 function addToList(id,name) {
-if (myList.length>0) {
-  for (const a of myList) {
-    if (a!==id) {
-      const updatedArray = [...myList,id];
-      setMyList(updatedArray)
-      toast(`${name} is added to mylist`,{
-        onClick: () => showMyList(updatedArray)
-       })
-    }
-    else {
-    toast(`${name} is already in mylist`)
-    }
+  if (myList.includes(id)) {
+    toast(`${name} is already in mylist`);
+  } else {
+    const updatedArray = [...myList, id];
+    setMyList(updatedArray);
+    toast(`${name} is added to mylist`, {
+      onClick: () => showMyList(updatedArray),
+    });
   }
-}else{
-  const updatedArray = [...myList,id];
-      setMyList(updatedArray)
-      toast(`${name} is added to mylist`,{
-        onClick: () => showMyList(updatedArray)
-       })
-}
-
 }
 async function clearMyList () {
   setMyList([])
