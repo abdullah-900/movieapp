@@ -12,7 +12,7 @@ function Nav() {
     const data = window.localStorage.getItem('myList');
      if (data!==null) setMyList(JSON.parse(data))
     setFinish(true)
- toast('click on movie name to show the story')
+ toast('click on movie name to show story and on rating to view reviews')
     },[])
 useEffect(()=>{ 
   myList && showMyList()

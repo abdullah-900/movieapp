@@ -1,4 +1,4 @@
-
+@import "~bootstrap/scss/bootstrap";
 input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
@@ -57,7 +57,10 @@ position: fixed;
  }
 display: flex;
 background-color: #4D455D;
-padding: 5px;
+padding: 35px;
+@include mobile(){
+  padding: 10px;
+}
 justify-content: space-around;
 align-items: center;
   h1{
@@ -93,7 +96,7 @@ align-items: center;
       width: 20px;
       height: 20px;
       margin-left: -40px;
-     margin-bottom: -5px;
+      margin-bottom: 6px;
     }
    }
   }
@@ -131,8 +134,8 @@ align-items: center;
       flex-direction: column;
       img{
         border-radius: 4px 4px 0px 0px;
-        width: 210px;
-        height: 300px;
+        width: 250px;
+        height: 400px;
       }
 }
   
@@ -151,8 +154,10 @@ align-items: center;
     gap:5px;
   }
   .rating{
+     cursor: pointer;
     position: absolute;
     display:flex;
+    align-items: center;
     left: 0px;
     background-color:yellow;
     border-radius: 3px;
@@ -172,12 +177,18 @@ align-items: center;
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin-top: -5px;
           background-color: #4D455D;
-          width: 200px;
-          padding: 5px;
+          margin-top: -2px;
+          width: 250px;
+          padding-top: 15px;
+          padding-bottom: 15px;
           border-radius: 3px;
           cursor: pointer;
+          p{
+            margin-top: 5px;
+            margin-left: 5px;
+        
+          }
       }
    
       .overview{
@@ -189,11 +200,49 @@ align-items: center;
         align-items: center;
         margin-top: -5px;
         background-color: #4D455D;
-        width: 200px;
-        padding: 5px;
+        width: 250px;
         border-radius: 3px;
+        padding-left: 15px;
+        padding-right: 15px;
+        justify-content: center;
       }
       }
     
+    }
+
+  }
+  .mod{
+    .review{
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      .user{
+
+        display: flex;
+        align-items: center;
+       margin-bottom: -5px;
+        gap: 10px;
+        img{
+          border-radius: 50%;
+          width: 50px;
+          height: 50px;
+        }
+      }
+      p{
+        cursor: pointer;
+      }
+      .rating{
+        display:flex;
+        align-items: center;
+        background-color:yellow;
+        border-radius: 3px;
+        padding: 6px;
+        gap:6px;
+        img{
+          width: 15px;
+          height: 15px;
+        }
+      }
     }
   }

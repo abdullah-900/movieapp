@@ -3,11 +3,35 @@ import { useEffect,useContext } from 'react'
 import {MdAdd,MdOutlineRemoveCircleOutline,MdDelete} from "react-icons/md"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Modal from 'react-bootstrap/Modal';
 
 import { ct } from "./contexts/context";
 const Movies = () => {  
 const [checkIndex,setCheckIndex]=useState(null)
+const [showp,setShowP]=useState(false)
   const {movies,setMovies,myList,setMyList,show,setShow}=useContext(ct)
+  const pstyle={maxHeight:'50px',overFlow:'hidden'}
+  const [sh,setSh]=useState(false)
+  const [reviews,setReviews]=useState([])
+  const [i,seti]=useState(null)
+function handleExtend(index) {
+seti(i===index?null:index)
+setShowP(!showp)
+}
+function fixUrl(url) {
+  let base='https://secure.gravatar.com/avatar/'
+  if (url!==null) { 
+    if (/https:\/\/secure\.gravatar\.com\/avatar\//.test(url)) {
+      let fixedUrl = url.replace(/^\/+/, "");
+      return fixedUrl
+    } else{
+      return base+url
+    }
+
+  }else {
+    return 'https://i.imgur.com/OAI1jMl.png'
+  }
+}
 useEffect(() => {
   window.localStorage.setItem('myList', JSON.stringify(myList));
 }, [myList]);
@@ -58,6 +82,15 @@ function checkClicked(movieindex) {
 setCheckIndex(checkIndex===movieindex?null:movieindex)
 }
 const postersurl='https://image.tmdb.org/t/p/w500'
+function handleClose(){
+  setSh(false)
+}
+async function showRate(id) {
+  setSh(true)
+  const list=await fetch(` https://api.themoviedb.org/3/movie/${id}/reviews?api_key=bdb6d2123e88fcbeacd36ef2ce0e2da1&language=en-US&page=1`)
+  const jn=await list.json()
+ setReviews(jn.results)
+}
   return (
     <>
     <ToastContainer/>
@@ -70,9 +103,9 @@ const postersurl='https://image.tmdb.org/t/p/w500'
   {movies.map((movie, index) => (
  <div   key={index} className='moviecard'>
 <div className='ratingimage'>
-{ show && <MdAdd onClick={()=>addToList(movie.id,movie.title)}  size='1.8em' className='controlicon'/>}
-{!show&& myList.length>0 && <MdOutlineRemoveCircleOutline onClick={()=>removeFromList(movie.id,movie.title)}  size='1.8em' className='controlicon'></MdOutlineRemoveCircleOutline>}
-<div className='rating'>
+{ show && <MdAdd onClick={()=>addToList(movie.id,movie.title)}  size='2.2em' className='controlicon'/>}
+{!show&& myList.length>0 && <MdOutlineRemoveCircleOutline onClick={()=>removeFromList(movie.id,movie.title)}  size='2.2em' className='controlicon'></MdOutlineRemoveCircleOutline>}
+<div className='rating' onClick={()=>showRate(movie.id)}>
   <img src={process.env.PUBLIC_URL + '/star-regular.svg '}></img>
   <span>{Math.floor(movie.vote_average* 10) / 10}</span>
  </div>
@@ -88,8 +121,26 @@ const postersurl='https://image.tmdb.org/t/p/w500'
  </div>
   ))}
    </div>
-
+   <Modal className='mod' show={sh} onHide={handleClose}>
+   <Modal.Header closeButton>
+          <Modal.Title>Reviews</Modal.Title>
+        </Modal.Header>
+{reviews.map((r,index)=>(
+  <div key={index} className='review'>
+<div className='user'>
+<img src={fixUrl(r.author_details.avatar_path)}></img>
+<span>{r.author}</span>
+<div className='rating'>
+  <img src={process.env.PUBLIC_URL + '/star-regular.svg '}></img>
+  <span>{r.author_details.rating>0?r.author_details.rating:0}</span>
+ </div>
+</div>
+{i===index ?<p onClick={()=>handleExtend(index)}>{r.content}</p>:<p onClick={()=>handleExtend(index)}>{`${r.content.slice(0, 200)}...`}</p>}
+</div>
+))}
+      </Modal>
    </div>
+
      </>
   )
 
