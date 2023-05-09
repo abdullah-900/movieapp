@@ -38,7 +38,7 @@ To delete all the movies from your favorites list, click on the delete button.
 Explore top rated, upcoming, and popular movies by clicking on the corresponding buttons in the navigation bar.
 
 ## Single Page Application
-The entire app is built as a single page application (SPA) to improve the user experience by reducing the need to navigate to multiple pages.
+The entire app is built as a single page application (SPA) to improve the user experience by reducing the need to navigate to multiple pages. Navigation buttons have also been added at the bottom of the app to allow users to easily navigate between different pages
 
 ### Local Storage
 
