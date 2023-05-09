@@ -1,19 +1,28 @@
 import React, { useState } from 'react'
-import { useEffect,useContext } from 'react'
+import { useEffect,useContext,useRef } from 'react'
 import {MdAdd,MdOutlineRemoveCircleOutline,MdDelete} from "react-icons/md"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from 'react-bootstrap/Modal';
-
 import { ct } from "./contexts/context";
 const Movies = () => {  
 const [checkIndex,setCheckIndex]=useState(null)
 const [showp,setShowP]=useState(false)
-  const {movies,setMovies,myList,setMyList,show,setShow}=useContext(ct)
-  const pstyle={maxHeight:'50px',overFlow:'hidden'}
+const buttons=[1,2,3,4,5,6,7]
+  const {movies,setMovies,myList,setMyList,show,setShow,genre,currentpage,setCurrentpage}=useContext(ct)
   const [sh,setSh]=useState(false)
   const [reviews,setReviews]=useState([])
   const [i,seti]=useState(null)
+  async function handleSelect(val,num) {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+      const list=await fetch(`https://api.themoviedb.org/3/movie/${val}?api_key=bdb6d2123e88fcbeacd36ef2ce0e2da1&language=en-US&page=${num}`)
+      const jn=await list.json()
+      setMovies(jn.results)
+      
+  }
 function handleExtend(index) {
 seti(i===index?null:index)
 setShowP(!showp)
@@ -94,13 +103,13 @@ async function showRate(id) {
   return (
     <>
     <ToastContainer/>
-<div className='mylist'>
+<div   className='mylist'>
 <div className='controllist'>
 {!show && <h1>Mylist</h1>}
 { !show && <MdDelete onClick={clearMyList} size='1.7em' className='del'></MdDelete>}
 </div>
-  <div className='movies'>
-  {movies.map((movie, index) => (
+  <div style={{ overflowY: 'scroll'}} className='movies'>
+  {movies.sort((a, b) => b.vote_average - a.vote_average).map((movie, index) => (
  <div   key={index} className='moviecard'>
 <div className='ratingimage'>
 { show && <MdAdd onClick={()=>addToList(movie.id,movie.title)}  size='2.2em' className='controlicon'/>}
@@ -113,7 +122,7 @@ async function showRate(id) {
 </div>
 <div onClick={()=>checkClicked(index)} className='info'> 
 <p>{movie.title}</p>
-   
+
 </div>
 <div className='overview'>
 {index===checkIndex && <p>{movie.overview}</p>}
@@ -125,7 +134,7 @@ async function showRate(id) {
    <Modal.Header closeButton>
           <Modal.Title>Reviews</Modal.Title>
         </Modal.Header>
-{reviews.map((r,index)=>(
+{reviews.length>0?reviews.map((r,index)=>(
   <div key={index} className='review'>
 <div className='user'>
 <img src={fixUrl(r.author_details.avatar_path)}></img>
@@ -137,8 +146,13 @@ async function showRate(id) {
 </div>
 {i===index ?<p onClick={()=>handleExtend(index)}>{r.content}</p>:<p onClick={()=>handleExtend(index)}>{`${r.content.slice(0, 200)}...`}</p>}
 </div>
-))}
+)):<p>no reviews available</p>}
       </Modal>
+     { show && <div className='navbuttons'>
+     {buttons.map((b,i)=>(
+      <button onClick={()=>handleSelect(genre,b)} key={i}>{b}</button>
+     ))}
+      </div>}
    </div>
 
      </>

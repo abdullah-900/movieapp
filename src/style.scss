@@ -207,7 +207,25 @@ align-items: center;
         justify-content: center;
       }
       }
-    
+    .navbuttons{
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      margin: 20px;
+      padding: 20px;
+      button{
+        display: inline-block;
+        background-color: #E96479;
+        text-align: center;
+        padding: 15px;
+        outline: none;
+        border-radius: 5px;
+        border: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        font-weight: bold;        
+      }
+    }
     }
 
   }

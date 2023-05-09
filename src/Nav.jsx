@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function Nav() {
 
   const [finish ,setFinish]=useState(false)
-  const {setMovies,setMyList,myList,setShow}=useContext(ct)
+  const {setMovies,setMyList,myList,setShow,setGenre}=useContext(ct)
   
   useEffect (()=>{
     const data = window.localStorage.getItem('myList');
@@ -51,7 +51,8 @@ function handleKeyDown(e) {
 }
 async function handleSelect(val) {
   setShow(true)
-    const list=await fetch(`https://api.themoviedb.org/3/movie/${val}?api_key=bdb6d2123e88fcbeacd36ef2ce0e2da1&language=en-US&page=1`)
+  setGenre(val)
+    const list=await fetch(`https://api.themoviedb.org/3/movie/${val}?api_key=bdb6d2123e88fcbeacd36ef2ce0e2da1&language=en-US`)
     const jn=await list.json()
     setMovies(jn.results)
     
