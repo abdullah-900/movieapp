@@ -1,4 +1,11 @@
 @import "~bootstrap/scss/bootstrap";
+
+::-webkit-scrollbar{
+  display: none  !important;
+}
+body {
+  -ms-overflow-style: none  !important;
+}
 input[type="search"]::-webkit-search-cancel-button {
   display: none;
 }
@@ -119,6 +126,8 @@ align-items: center;
     }
   }
   .movies{
+
+   
     padding: 20px;
     background-color: #F5E9CF;
     display: grid;
