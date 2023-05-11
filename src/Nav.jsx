@@ -50,6 +50,10 @@ function handleKeyDown(e) {
   }
 }
 async function handleSelect(val) {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
   setSelected(val)
   setShow(true)
   setGenre(val)
@@ -59,6 +63,10 @@ async function handleSelect(val) {
     
 }
 async function showMyList(val) {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
   setSelected(val)
   const arr=[]
 for(const a of myList) {
