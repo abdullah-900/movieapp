@@ -7,7 +7,7 @@ function Nav() {
 
   const [finish ,setFinish]=useState(false)
   const {setMovies,setMyList,myList,setShow,setGenre}=useContext(ct)
-  
+  const [selected,setSelected]=useState(false);
   useEffect (()=>{
     const data = window.localStorage.getItem('myList');
      if (data!==null) setMyList(JSON.parse(data))
@@ -50,6 +50,7 @@ function handleKeyDown(e) {
   }
 }
 async function handleSelect(val) {
+  setSelected(val)
   setShow(true)
   setGenre(val)
     const list=await fetch(`https://api.themoviedb.org/3/movie/${val}?api_key=bdb6d2123e88fcbeacd36ef2ce0e2da1&language=en-US`)
@@ -57,7 +58,8 @@ async function handleSelect(val) {
     setMovies(jn.results)
     
 }
-async function showMyList() {
+async function showMyList(val) {
+  setSelected(val)
   const arr=[]
 for(const a of myList) {
   const myfav=await fetch(`https://api.themoviedb.org/3/movie/${a}?api_key=bdb6d2123e88fcbeacd36ef2ce0e2da1`)
@@ -92,10 +94,10 @@ setShow(false)
     <input value={keyword} onChange={(e)=>{SetKeyword(e.target.value)}} type="search" placeholder="Search"></input>
     <img  onClick={fetchMovies} src={process.env.PUBLIC_URL + '/search.svg '}></img>
   </form>
-    <a onClick={()=>handleSelect('top_rated')}>TopRated</a>
-    <a onClick={()=>handleSelect('popular')}>Popular</a>
-    <a onClick={()=>handleSelect('upcoming')}>Upcoming</a>
-    <a onClick={showMyList}>Mylist</a>
+    <a style={selected==='top_rated'?{color:'#E96479'}:{}} onClick={()=>handleSelect('top_rated')}>TopRated</a>
+    <a style={selected==='popular'?{color:'#E96479'}:{}} onClick={()=>handleSelect('popular')}>Popular</a>
+    <a style={selected==='upcoming'?{color:'#E96479'}:{}} onClick={()=>handleSelect('upcoming')}>Upcoming</a>
+    <a style={selected==='mylist'?{color:'#E96479'}:{}} onClick={()=>showMyList('mylist')}>Mylist</a>
     </nav>
   );
  }
