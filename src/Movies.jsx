@@ -9,7 +9,7 @@ const Movies = () => {
 const [checkIndex,setCheckIndex]=useState(null)
 const [showp,setShowP]=useState(false)
 const buttons=[1,2,3,4,5,6,7]
-  const {movies,setMovies,myList,setMyList,show,setShow,genre,currentpage,setCurrentpage}=useContext(ct)
+  const {movies,setMovies,myList,setMyList,show,setShow,genre}=useContext(ct)
   const [sh,setSh]=useState(false)
   const [reviews,setReviews]=useState([])
   const [i,seti]=useState(null)
@@ -96,7 +96,7 @@ function handleClose(){
 }
 async function showRate(id) {
   setSh(true)
-  const list=await fetch(` https://api.themoviedb.org/3/movie/${id}/reviews?api_key=bdb6d2123e88fcbeacd36ef2ce0e2da1&language=en-US&page=1`)
+  const list=await fetch(` https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_API}&language=en-US&page=1`)
   const jn=await list.json()
  setReviews(jn.results)
 }

@@ -13,7 +13,7 @@ const App = () => {
     const [genre,setGenre]=useState(null)
     const [currentpage,setCurrentpage]=useState(null)
   return (
-<ct.Provider value={{movies,setMovies,myList,setMyList,show,setShow,genre,setGenre,currentpage,setCurrentpage}}>
+<ct.Provider value={{movies,setMovies,myList,setMyList,show,setShow,genre,setGenre}}>
     <div className='appcontainer'>
     <Nav/>
     <Movies/>
