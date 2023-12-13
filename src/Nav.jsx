@@ -4,7 +4,6 @@ import { ct } from "./contexts/context";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function Nav() {
-
   const [finish ,setFinish]=useState(false)
   const {setMovies,setMyList,myList,setShow,setGenre}=useContext(ct)
   const [selected,setSelected]=useState(false);
@@ -98,14 +97,16 @@ setShow(false)
   return (
     <nav className="nav">
       <h1>FilmFinder</h1>
-  <form onKeyDown={handleKeyDown} className="searchbar">
+  <div onKeyDown={handleKeyDown} className="searchbar">
     <input value={keyword} onChange={(e)=>{SetKeyword(e.target.value)}} type="search" placeholder="Search"></input>
     <img  onClick={fetchMovies} src={process.env.PUBLIC_URL + '/search.svg '}></img>
-  </form>
-    <a style={selected==='top_rated'?{color:'#E96479'}:{}} onClick={()=>handleSelect('top_rated')}>TopRated</a>
-    <a style={selected==='popular'?{color:'#E96479'}:{}} onClick={()=>handleSelect('popular')}>Popular</a>
-    <a style={selected==='upcoming'?{color:'#E96479'}:{}} onClick={()=>handleSelect('upcoming')}>Upcoming</a>
-    <a style={selected==='mylist'?{color:'#E96479'}:{}} onClick={()=>showMyList('mylist')}>Mylist</a>
+  </div>
+  <ul className="navitems">
+    <li><a style={selected==='top_rated'?{color:'#E96479'}:{}} onClick={()=>handleSelect('top_rated')}>TopRated</a></li>
+    <li><a style={selected==='popular'?{color:'#E96479'}:{}} onClick={()=>handleSelect('popular')}>Popular</a></li>
+    <li><a style={selected==='upcoming'?{color:'#E96479'}:{}} onClick={()=>handleSelect('upcoming')}>Upcoming</a></li>
+    <li><a style={selected==='mylist'?{color:'#E96479'}:{}} onClick={()=>showMyList('mylist')}>Mylist</a></li>
+  </ul>
     </nav>
   );
  }
